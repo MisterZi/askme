@@ -1,0 +1,21 @@
+<%# Этот шаблон отрисуется, когда пользователь захочет посмотреть список пользователей %>
+<div class="content-wrapper buffer-both text-center">
+  <div class="buffer-both">
+    <h1 class="title-medium">Наши пользователи</h1>
+  </div>
+
+  <%# Этот код выводит каждого пользователя в цикле %>
+  <% @users.each do |user| %>
+      <div class="users-list-item">
+        <div class="user-image-div user-image-div-small">
+          <%# Пользуемся аж тремя хелперами %>
+          <%# link_to — генерирует ссылку %>
+          <%# image_tag — генерирует картинку %>
+          <%# user_avatar — достает из пользователя ссылку на картинку или подставляет дефолтную %>
+          <%# Хелпер user_path(user) возвращает относительный путь %>
+          <%# страницы пользователя, например /user/1 %>
+          <%= link_to image_tag(user_avatar(user), class: 'user-image'), user_path(user) %>
+        </div>
+      </div>
+  <% end %>
+</div>

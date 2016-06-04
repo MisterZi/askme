@@ -1,6 +1,64 @@
+<%#В шаблоне show мы пишем html-код для вывода внутреннго содержимого страницы пользователя%>
 
-<h1>
+<%#Блок с информацией о пользователей%>
+<div class="user-header text-center">
+  <h1 class="title-medium">
+    <%= @user.name %>
+  </h1>
 
-  <%= @hello %>
+  <div class="user-image-div">
+    <%#Мы используем хелперы image_tag (встроенный в rails) и наш user_avatar%>
+    <%= image_tag user_avatar(@user), class: 'user-image', alt: '[Фото]' %>
+  </div>
 
-</h1>
+  <h2 class="title-small buffer-both">
+    @<%= @user.username %>
+  </h2>
+
+  <div class="user-ask-button container text-center">
+    <%#Используем встроенный в rails хелпер link_to%>
+    <%= link_to "Спроси меня", '', class: 'button button-light', id: 'ask-button' %>
+  </div>
+</div>
+
+<%#Блок с формой для задавания пользователю вопроса%>
+<div class="user-question-form-div column-1-4 column-1-4-right" id='ask-form'>
+  <div class="user-question-form buffer-both">
+    <div class="form">
+      <%#Мы используем хелпер form_for, принимающий на вход блок erb-кода, в котором доступна%>
+      <%#переменная f, содержащая так называемый form builder, с помощью которого можно делать%>
+      <%#поля формы для нового вопроса%>
+      <%= form_for @new_question do |f| %>
+          <%#С помощью объекта для создания полей формы, связанной с моделью @new_question%>
+          <%#Мы создаем инпуты с нужными полями для формы, значения будут подставлены rails%>
+          <%#автоматически%>
+          <%= f.hidden_field :user_id %>
+
+          <div class="form-field">
+            <%= f.label "Ваш вопрос для @#{@user.username}", class: 'form-label' %>
+            <%= f.text_area :text, class: 'form-textarea' %>
+          </div>
+
+          <div class="form-action">
+            <%= submit_tag 'Задать вопрос', class: 'button button-small button-dark' %>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%#Блок со списком вопросов к пользователю%>
+<div class="column-3-4">
+  <div class="user-questions buffer-both">
+    <div class="questions-list">
+      <%#Обратите внимание, как мы делаем цикл по всем вопросам,%>
+      <%#точно также, как мы делали циклы в ruby%>
+      <% @questions.each do |question| %>
+          <%#Мы рисуем здесь для кажого вопроса в списке вопросов%>
+          <%#фрагмент (паршал), передавая в него текущий вопрос%>
+          <%#Это очень похоже на вызов метода в ruby%>
+          <%= render partial: 'questions/question', object: question %>
+      <% end %>
+    </div>
+  </div>
+</div>
