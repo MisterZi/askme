@@ -14,6 +14,20 @@ class User < ActiveRecord::Base
   # если не задан email и username, объект не будет сохранен в базу
   validates :email, :username, presence: true
 
+  # если длина username превышает 40 символов
+  # объект не будет сохранен в базу
+  validates :username, length: { maximum: 40,
+                                 too_long: "%{count} characters is the maximum allowed" }
+
+  # если username не состоит из латинских букв/цифр/знака _
+  # объект не будет сохранен в базу
+  validates :username, format: { with: /\A[a-zA-Z0-9_]+\z/,
+                                 message: "only allows letters, numbers and the symbol _" }
+
+  # если email не соответствует формату
+  # объект не будет сохранен в базу
+  validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create }
+
   # если email и username не уникальны (уже такие есть в баже),
   # объект не будет сохранен в базу
   validates :email, :username, uniqueness: true
