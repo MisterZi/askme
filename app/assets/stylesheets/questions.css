@@ -1,0 +1,43 @@
+.questions-list {
+    padding: 10px 0;
+}
+
+.question {
+    background: white;
+}
+
+.question-content {
+    padding: 10px 15px;
+}
+
+.question + .question {
+    margin-top: 10px;
+}
+
+.question-text,
+.question-answer {
+    margin-bottom: 10px;
+}
+
+.question-text {
+    color: #005a55;
+}
+
+.question-answer {
+}
+
+.question-date {
+    color: #a0a0a0;
+    font-size: 12px;
+}
+
+.question-actions {
+    font-size: 20px;
+    border-top: 1px solid #D9E6E5;
+    text-align: right;
+    padding: 10px 15px;
+}
+
+.question-actions a {
+    margin-left: 10px;
+}
