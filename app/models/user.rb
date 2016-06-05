@@ -26,9 +26,9 @@ class User < ActiveRecord::Base
 
   # если email не соответствует формату
   # объект не будет сохранен в базу
-  validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create }
+  validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
 
-  # если email и username не уникальны (уже такие есть в баже),
+  # если email и username не уникальны (уже такие есть в базе),
   # объект не будет сохранен в базу
   validates :email, :username, uniqueness: true
 
@@ -45,9 +45,16 @@ class User < ActiveRecord::Base
   # Понадобится при создании формы регистрации, чтобы снизить число ошибочно введенных паролей
   validates_confirmation_of :password
 
+  # перед валидацией приводим username к нижнему регистру
+  before_validation :downcase_username
+
   # перед сохранением объекта в базу - создаем зашифрованный пароль, который будет хранится в БД
   before_save :encrypt_password
 
+  # приводим username к нижнему регистру
+  def downcase_username
+    self.username.downcase!
+  end
 
   # шифруем пароль, если он задан
   def encrypt_password
