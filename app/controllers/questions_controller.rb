@@ -44,6 +44,11 @@ class QuestionsController < ApplicationController
     end
 
     def question_params
-      params.require(:question).permit(:user_id, :text, :answer)
+      # защита от уязвимости -- пользователь может менять ответы только у собственных вопросов
+      if current_user.present? && params[:question][:user_id].to_i == current_user.id
+        params.require(:question).permit(:user_id, :text, :answer)
+      else
+        params.require(:question).permit(:user_id, :text)
+      end
     end
 end
