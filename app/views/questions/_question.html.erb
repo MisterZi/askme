@@ -1,20 +1,38 @@
-<%#Это фрагмет (паршал, partial) для вывода вопроса%>
-<%#В нем определена локальная переменная question, в которую при вызове%>
-<%#будет передан как в метод ruby объект после ключа (object: @question)%>
+<%# Это фрагмет (паршал, partial) для вывода вопроса %>
+<%# В нем определена локальная переменная question, в которую при вызове %>
+<%# будет передан как в метод ruby объект после ключа (object: @question) %>
+
+<!-- Локальная переменная этого паршиала -->
+<% question ||= nil %>
+<!-- Определяем какая будет иконка -->
+<% action_icon = question.answer.blank? ? 'reply' : 'pencil' %>
+
+
 <div class="question">
   <div class="question-content">
     <div class="question-text text-lead">
       <%= question.text %>
     </div>
 
+    <!-- Если вопрос имеет ответ, показать его -->
     <% if question.answer.present? %>
         <div class="question-answer text-lead">
-          <%= question.answer if question.answer.present? %>
+          <%= question.answer %>
         </div>
     <% end %>
 
     <div class="question-date">
-      <%= question.created_at.strftime('%d %b %M:%H') %>
+      <!-- Локализованный вывод даты вопроса в коротком формате -->
+      <%= l(question.created_at, format: :short) %>
     </div>
   </div>
+
+  <!-- Простая авторизация: только владелец вопроса может его редактировать -->
+  <% if question.user == current_user %>
+      <div class="question-actions">
+        <%= link_to fa_icon(action_icon), edit_question_path(question) %>
+        <%= link_to fa_icon('trash-o'), question_path(question),
+                    method: :delete, data: {confirm: 'Точно удалить вопрос?'} %>
+      </div>
+  <% end %>
 </div>

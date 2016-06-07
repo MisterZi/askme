@@ -1,0 +1,39 @@
+<!-- Форма для создания/правки вопроса -->
+
+<div class="form">
+  <!-- Форма для объекта @question -->
+  <%= form_for(@question) do |f| %>
+      <% if @question.errors.any? %>
+          <div class="form-errors">
+            <ul>
+              <% @question.errors.full_messages.each do |message| %>
+                  <li class="form-error-message"><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
+
+      <!-- Скрытое поле - айдишник юзера, кому задается вопрос -->
+      <%= f.hidden_field :user_id %>
+
+      <div class="form-field">
+        <%= f.label :text, 'Вопрос', class: 'form-label' %>
+        <%= f.text_area :text, class: 'form-textarea' %>
+      </div>
+
+
+      <!-- Простая авторизация - может ли текущий юзер править вопрос? -->
+      <% if current_user.present? && current_user == @question.user %>
+          <div class="form-field">
+            <%= f.label :answer, 'Ответ', class: 'form-label' %>
+            <%= f.text_area :answer, class: 'form-textarea' %>
+          </div>
+      <% end %>
+
+      <div class="form-action buffer-both">
+        <%= f.submit 'Сохранить', class: 'button button-dark button-small' %>
+        или
+        <%= link_to "вернуться", user_path(@question.user) %>
+      </div>
+  <% end %>
+</div>
