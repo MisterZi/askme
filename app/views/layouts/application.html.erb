@@ -1,27 +1,58 @@
+<%#Это макет для всех страниц нашего сайта%>
 <!DOCTYPE html>
 <html>
+<%#Именно он определяет, что будет в теге head каждой нашей html-страницы%>
 <head>
   <meta charset="UTF-8"/>
+  <%#Именно здесь мы подключаем все стили и прописываем один (в рамках обучения)%>
+  <%#тег title для всех страниц сайта%>
   <title>Хорошие вопросы</title>
-  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+  <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-  <div class="header">
-    <div class="container">
-      <div class="header-logo">
-        <h1 class="header-title"><%= link_to 'Хорошие вопросы', root_path %></h1>
-      </div>
+<div class="header">
+  <div class="container">
+    <div class="header-logo">
+      <%#Ссылка на главную страницу сайта root_path%>
+      <h1 class="header-title"><%= link_to "Хорошие вопросы", root_path %></h1>
     </div>
-  </div>
 
-  <div class="content">
-    <div class="container">
-      <%= yield %>
+    <div class="header-nav">
+      <!-- Если есть текущий юзер (значит он залогинен) -->
+      <% if current_user %>
+          <!-- Даем ссылки на его профиль и на логаут -->
+          <%= link_to "@#{current_user.username}", user_path(current_user) %> |
+          <%= link_to 'Выйти', log_out_path %>
+      <% else %>
+          <!-- Если нету - ссылки на регистрацию и логин -->
+          <%= link_to 'Зарегистрироваться', sign_up_path, class: 'button button-light button-small' %>
+          <%= link_to 'Войти', log_in_path, class: 'button button-light button-small' %>
+      <% end %>
+
     </div>
   </div>
+</div>
+
+<div class="content">
+  <div class="container">
+
+    <!-- Если в объеккте flash есть что-то, выводим содержимое на страницу -->
+    <% if flash.any? %>
+        <div class="content-wrapper buffer-both">
+          <% flash.each do |name, message| %>
+              <%= content_tag :div, message, class: "flash-#{name}" %>
+          <% end %>
+        </div>
+    <% end %>
+
+    <%= yield %>
+  </div>
+</div>
+
 
 </body>
 </html>

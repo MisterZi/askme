@@ -1,0 +1,53 @@
+<!-- Страница редактирования пользователя -->
+
+<div class="container content-wrapper buffer-both">
+  <h1 class="title-medium">Править профиль</h1>
+
+  <div class="column-1-2">
+    <%= form_for(@user) do |f| %>
+        <!-- Вывод ошибок валидации пользователя (если есть) -->
+        <% if @user.errors.any? %>
+            <div class="form-errors">
+              <ul>
+                <% for message in @user.errors.full_messages %>
+                    <li class="form-error-message"><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+        <% end %>
+
+        <div class="form-field">
+          <%= f.label :username, class: 'form-label' %>
+          <%= f.text_field :username, class: 'form-text-field' %>
+        </div>
+
+        <div class="form-field">
+          <%= f.label 'Ваше имя', class: 'form-label' %>
+          <%= f.text_field :name, class: 'form-text-field' %>
+        </div>
+
+        <div class="form-field">
+          <%= f.label 'URL вашей аватарки', class: 'form-label' %>
+          <%= f.text_field :avatar_url, class: 'form-text-field' %>
+        </div>
+
+        <div class="buffer-top-large buffer-bottom">
+          Если не хотите менять пароль — оставьте эти поля пустыми!
+        </div>
+
+        <div class="form-field">
+          <%= f.label :password, class: 'form-label' %>
+          <%= f.password_field :password, class: 'form-text-field' %>
+        </div>
+
+        <div class="form-field">
+          <%= f.label :password_confirmation, class: 'form-label' %>
+          <%= f.password_field :password_confirmation, class: 'form-text-field' %>
+        </div>
+
+        <div class="form-action buffer-top">
+          <%= f.submit 'Сохранить', class: 'button button-dark button-small' %>
+        </div>
+    <% end %>
+  </div>
+</div>

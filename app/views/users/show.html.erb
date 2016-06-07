@@ -6,6 +6,10 @@
     <%= @user.name %>
   </h1>
 
+  <div class="buffer-both">
+    <%=	link_to 'Редактировать профиль', edit_user_path(@user) if current_user == @user%>
+  </div>
+
   <div class="user-image-div">
     <%#Мы используем хелперы image_tag (встроенный в rails) и наш user_avatar%>
     <%= image_tag user_avatar(@user), class: 'user-image', alt: '[Фото]' %>

@@ -1,0 +1,58 @@
+<!--
+  Страница для регистрации нового пользователя.
+
+  Обратите внимание, что она очень похожа на страницу редактирования юзера,
+  что позволяет в подобных случаях использовать один и тот же паршиал form
+  в обоих страницах.
+ -->
+
+<div class="container content-wrapper buffer-both">
+  <h1 class="title-medium">Присоединяйся к нам!</h1>
+
+  <div class="column-1-2">
+    <div class="form">
+      <%= form_for @user do |f| %>
+
+          <!-- Вывод ошибок валидации пользователя (если есть) -->
+          <% if @user.errors.any? %>
+              <div class="form-errors">
+                <ul>
+                  <% for message in @user.errors.full_messages %>
+                      <li class="form-error-message"><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+          <% end %>
+
+          <div class="form-field">
+            <%= f.label :email, 'Логин (email)', class: 'form-label' %>
+            <%= f.text_field :email, class: 'form-text-field' %>
+          </div>
+
+          <div class="form-field">
+            <%= f.label :username, 'Никнейм', class: 'form-label' %>
+            <%= f.text_field :username, class: 'form-text-field' %>
+          </div>
+
+          <div class="form-field">
+            <%= f.label :name, 'Имя', class: 'form-label' %>
+            <%= f.text_field :name, class: 'form-text-field' %>
+          </div>
+
+          <div class="form-field">
+            <%= f.label :password, 'Пароль', class: 'form-label' %>
+            <%= f.password_field :password, class: 'form-text-field' %>
+          </div>
+
+          <div class="form-field">
+            <%= f.label :password_confirmation, 'Пароль ещё раз', class: 'form-label' %>
+            <%= f.password_field :password_confirmation, class: 'form-text-field' %>
+          </div>
+
+          <div class="form-action">
+            <%= f.submit 'Зарегистрироваться', class: 'button button-small button-dark' %>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>
