@@ -29,15 +29,15 @@
   <div class="user-statistics container text-center">
     <div class="column-1-3">
       <h1 class="title-small"><%=	@questions_count %></h1>
-      <%= sklonenie(@questions_count,'вопрос','вопроса','вопросов',false) %>
+      <p class="title-small"><%= sklonenie(@questions_count,'вопрос','вопроса','вопросов',false) %></p>
     </div>
     <div class="column-1-3">
       <h1 class="title-small"><%=	@answers_count %></h1>
-      <%= sklonenie(@answers_count,'ответ','ответа','ответов',false) %>
+      <p class="title-small"><%= sklonenie(@answers_count,'ответ','ответа','ответов',false) %></p>
     </div>
     <div class="column-1-3">
       <h1 class="title-small"><%=	@unanswered_count %></h1>
-      <p>без ответа</p>
+      <p class="title-small">без ответа</p>
     </div>
   </div>
 </div>
@@ -73,9 +73,6 @@
 <div class="column-3-4">
   <div class="user-questions buffer-both">
     <div class="questions-list">
-      <!--<div class="question-counter">-->
-        <%#<%= "#{@questions.count} #{sklonenie(@questions.count,'вопрос','вопроса','вопросов',false)}" %>
-      <!--</div>-->
 
       <%#Обратите внимание, как мы делаем цикл по всем вопросам,%>
       <%#точно также, как мы делали циклы в ruby%>
