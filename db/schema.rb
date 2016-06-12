@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160601163642) do
+ActiveRecord::Schema.define(version: 20160612102045) do
 
   create_table "questions", force: :cascade do |t|
     t.string   "text"
@@ -26,12 +26,13 @@ ActiveRecord::Schema.define(version: 20160601163642) do
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "username"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.string   "email"
     t.string   "password_hash"
     t.string   "password_salt"
     t.string   "avatar_url"
+    t.string   "background_color"
   end
 
 end

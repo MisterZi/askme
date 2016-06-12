@@ -2,6 +2,16 @@
 # для представлений (view) нашего приложения
 module ApplicationHelper
 
+  # Этот метод возващает цвет фона пользователя, если он у него есть
+  # Или дефолтный цвет
+  def user_background(user)
+    if user.background_color.present?
+      user.background_color
+    else
+      '#005a55'
+    end
+  end
+
   # Этот метод возвращает ссылку на автарку пользователя, если она у него есть
   # Или ссылку на дефолтную аватарку, которая лежит в app/assets/images
   def user_avatar(user)

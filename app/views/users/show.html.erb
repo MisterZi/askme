@@ -1,7 +1,7 @@
 <%#В шаблоне show мы пишем html-код для вывода внутреннго содержимого страницы пользователя%>
 
 <%#Блок с информацией о пользователей%>
-<div class="user-header text-center">
+<div style="background: <%= user_background(@user) %>" class="user-header text-center">
   <h1 class="title-medium">
     <%= @user.name %>
   </h1>
