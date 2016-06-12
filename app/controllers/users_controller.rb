@@ -29,7 +29,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to root_url, notice: 'Пользователь успешно зарегестрирован!'
+      redirect_to root_url, notice: 'Пользователь успешно зарегистрирован!'
     else
       render 'new'
     end
@@ -46,12 +46,23 @@ class UsersController < ApplicationController
     end
   end
 
+  def delete
+    if @user.delete
+      redirect_to user_path(@user), notice: 'Профиль успешно удален!'
+    else
+      render 'edit'
+    end
+  end
+
   # Это действие отзывается, когда пользователь заходит по адресу
   # /users/:id, например /users/1
   def show
     @questions = @user.questions.order(created_at: :desc)
 
     @new_question = @user.questions.build
+    @questions_count = @questions.count
+    @answers_count = @questions.where.not(answer: nil).count
+    @unanswered_count = @questions_count - @answers_count
   end
 
   private

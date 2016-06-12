@@ -18,12 +18,30 @@
   <h2 class="title-small buffer-both">
     @<%= @user.username %>
   </h2>
+</div>
 
+<div class="user-details">
   <div class="user-ask-button container text-center">
     <%#Используем встроенный в rails хелпер link_to%>
-    <%= link_to "Спроси меня", '', class: 'button button-light', id: 'ask-button' %>
+    <%= link_to 'Спроси меня', '', class: 'button button-light', id: 'ask-button' %>
+  </div>
+
+  <div class="user-statistics container text-center">
+    <div class="column-1-3">
+      <h1 class="title-small"><%=	@questions_count %></h1>
+      <%= sklonenie(@questions_count,'вопрос','вопроса','вопросов',false) %>
+    </div>
+    <div class="column-1-3">
+      <h1 class="title-small"><%=	@answers_count %></h1>
+      <%= sklonenie(@answers_count,'ответ','ответа','ответов',false) %>
+    </div>
+    <div class="column-1-3">
+      <h1 class="title-small"><%=	@unanswered_count %></h1>
+      <p>без ответа</p>
+    </div>
   </div>
 </div>
+
 
 <%#Блок с формой для задавания пользователю вопроса%>
 <div class="user-question-form-div column-1-4 column-1-4-right" id='ask-form'>
@@ -55,9 +73,9 @@
 <div class="column-3-4">
   <div class="user-questions buffer-both">
     <div class="questions-list">
-      <div class="question-counter">
-        <%= "#{@questions.count} #{sklonenie(@questions.count,'вопрос','вопроса','вопросов',false)}" %>
-      </div>
+      <!--<div class="question-counter">-->
+        <%#<%= "#{@questions.count} #{sklonenie(@questions.count,'вопрос','вопроса','вопросов',false)}" %>
+      <!--</div>-->
 
       <%#Обратите внимание, как мы делаем цикл по всем вопросам,%>
       <%#точно также, как мы делали циклы в ruby%>
