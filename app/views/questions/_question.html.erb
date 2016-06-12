@@ -18,8 +18,13 @@
     <% if question.answer.present? %>
         <div class="question-answer text-lead">
           <%= question.answer %>
+
         </div>
     <% end %>
+
+    <div class="question-host">
+      <%=	 question.user.username %>
+    </div>
 
     <div class="question-date">
       <!-- Локализованный вывод даты вопроса в коротком формате -->
