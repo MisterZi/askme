@@ -32,7 +32,9 @@
         </div>
 
         <div class="form-field">
-          <p>Укажите цвет фона: <input type="color" name="bg" value="#005a55"></p>
+          <%= f.label 'Укажите цвет фона:' %>
+          <%= f.color_field :background_color, value: @user.background_color %>
+          <!--<p>Укажите цвет фона: <input type="color" name="" value="#005a55"></p>-->
         </div>
 
         <div class="buffer-top-large buffer-bottom">
