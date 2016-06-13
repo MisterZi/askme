@@ -46,9 +46,9 @@ class UsersController < ApplicationController
     end
   end
 
-  def delete
-    if @user.delete
-      redirect_to user_path(@user), notice: 'Профиль успешно удален!'
+  def destroy
+    if @user.destroy
+      redirect_to root_url, notice: 'Профиль успешно удален!'
     else
       render 'edit'
     end
@@ -60,6 +60,7 @@ class UsersController < ApplicationController
     @questions = @user.questions.order(created_at: :desc)
 
     @new_question = @user.questions.build
+    # @question_author = @questions.author_id
     @questions_count = @questions.count
     @answers_count = @questions.where.not(answer: nil).count
     @unanswered_count = @questions_count - @answers_count
