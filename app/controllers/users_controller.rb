@@ -29,6 +29,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
+      create_session(@user.email, @user.password)
       redirect_to root_url, notice: 'Пользователь успешно зарегистрирован!'
     else
       render 'new'

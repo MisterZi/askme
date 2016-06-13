@@ -12,6 +12,12 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
   end
 
+  # хелпер, создающий новую сессию
+  def create_session(email, password)
+    @user = User.authenticate(email, password)
+    session[:user_id] = @user.id
+  end
+
   # редиректит юзера на главную с предупреждением
   def reject_user
     redirect_to root_path, alert: 'Вам сюда низя!'
