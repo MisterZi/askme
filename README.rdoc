@@ -1,28 +1,14 @@
-== README
+== Хорошие вопросы
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Аналог AskFm на rails 4.2. Позволяет регистрироваться, задавать друг другу вопросы и отвечать на них.
 
-Things you may want to cover:
+Рассчитано на работу с Heroku.
 
-* Ruby version
+== Демо
 
-* System dependencies
+https://arcane-coast-41978.herokuapp.com
 
-* Configuration
+== Установка
 
-* Database creation
+Для разворачивания своей копии клонируйте гит репозиторий (зеленая кнопочка в правом верхнем углу на гитхабе), залейте на свое приложение на Heroku (или создайте новое <tt>heroku create</tt>). Также поправьте урл сайта в <tt>production.rb</tt>.
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
