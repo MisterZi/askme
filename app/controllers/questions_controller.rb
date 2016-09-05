@@ -9,18 +9,19 @@ class QuestionsController < ApplicationController
   # POST /questions
   def create
     @question = Question.new(question_params)
+    @question.author = current_user if current_user.present?
 
     if @question.save
       redirect_to user_path(@question.user), notice: 'Вопрос задан'
     else
-      render :new
+      render :edit
     end
   end
 
   # PATCH/PUT /questions/1
   def update
     if @question.update(question_params)
-      redirect_to user_path(@question.user), notice: 'Вопрос сохранн'
+      redirect_to user_path(@question.user), notice: 'Вопрос сохранён'
     else
       render :edit
     end

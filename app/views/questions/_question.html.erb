@@ -22,8 +22,13 @@
         </div>
     <% end %>
 
+    <!-- Отображаем юзера, задавшего вопрос, если он представлен -->
     <div class="question-author">
-
+      <% if question.author.present? %>
+        <%= link_to "@#{question.author.username}", user_path(question.author) %>
+      <% else %>
+        <%= 'Аноним' %>
+      <% end %>
     </div>
 
     <div class="question-date">

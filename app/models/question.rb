@@ -14,4 +14,6 @@ class Question < ActiveRecord::Base
   validates :text, length: { maximum: 255,
                              too_long: "%{count} characters is the maximum allowed" }
 
+  # добавляем связь с author_id
+  belongs_to :author, class_name: 'User'
 end
