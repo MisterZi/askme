@@ -85,7 +85,7 @@ class User < ActiveRecord::Base
   def self.authenticate(email, password)
     user = find_by(email: email) # сперва находим кандидата по email
 
-    # ОБРАТИТЕ внимание: сравнивается password_hash, а оригинальный пароль так никогда
+    # Сравнивается password_hash, а оригинальный пароль так никогда
     # и не сохраняется нигде!
     if user.present? && user.password_hash == User.hash_to_string(OpenSSL::PKCS5.pbkdf2_hmac(password, user.password_salt, ITERATIONS, DIGEST.length, DIGEST))
       user
