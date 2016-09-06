@@ -6,7 +6,7 @@
 
 == Демо
 
-https://arcane-coast-41978.herokuapp.com
+https://goodquestions.herokuapp.com
 
 == Установка
 
