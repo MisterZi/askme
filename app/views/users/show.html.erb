@@ -61,6 +61,9 @@
             <%= f.text_area :text, class: 'form-textarea' %>
           </div>
 
+          <%# Добавляем код для вставки виджета капчи в форму вопроса на странице юзера %>
+          <%= recaptcha_tags size: 'compact' %>
+
           <div class="form-action">
             <%= submit_tag 'Задать вопрос', class: 'button button-small button-dark' %>
           </div>
