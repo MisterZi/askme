@@ -31,7 +31,7 @@
       <% end %>
 
       <%# Добавляем код для вставки виджета капчи на страницу с формой вопроса %>
-      <%= recaptcha_tags unless current_user.present? %>
+      <%= recaptcha_tags %>
 
       <div class="form-action buffer-both">
         <%= f.submit 'Сохранить', class: 'button button-dark button-small' %>

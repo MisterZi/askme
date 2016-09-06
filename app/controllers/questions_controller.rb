@@ -20,7 +20,7 @@ class QuestionsController < ApplicationController
 
   # PATCH/PUT /questions/1
   def update
-    if @question.update(question_params)
+    if check_captcha(@question) && @question.update(question_params)
       redirect_to user_path(@question.user), notice: 'Вопрос сохранён'
     else
       render :edit
@@ -55,6 +55,6 @@ class QuestionsController < ApplicationController
 
     # Метод, который проверяет капчу с использованием гема recaptcha
     def check_captcha(model)
-      verify_recaptcha(model: model) unless current_user.present?
+      verify_recaptcha(model: model)
     end
 end
