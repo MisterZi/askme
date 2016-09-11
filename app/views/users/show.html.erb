@@ -62,7 +62,7 @@
           </div>
 
           <%# Добавляем код для вставки виджета капчи в форму вопроса на странице юзера %>
-          <%= recaptcha_tags size: 'compact' %>
+          <%= recaptcha_tags size: 'compact' unless current_user.present?%>
 
           <div class="form-action">
             <%= submit_tag 'Задать вопрос', class: 'button button-small button-dark' %>
